@@ -2,7 +2,10 @@ package dev.hashnode.danielwaiguru.groceryke.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+
+val primaryColor = Color(0xFF58C275)
+val primaryVariantColor = Color(0xFF8AD160)
+val faintGreen = Color(0xFFEDF8ED)
+val faintOrange = Color(0xFFFAF0E8)
+val orange = Color(0xFFFF8516)
+val secondaryColor = Color(0xFF282C4B)
