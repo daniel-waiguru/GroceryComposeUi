@@ -1,4 +1,4 @@
-package dev.hashnode.danielwaiguru.groceryke
+package dev.hashnode.danielwaiguru.groceryke.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
