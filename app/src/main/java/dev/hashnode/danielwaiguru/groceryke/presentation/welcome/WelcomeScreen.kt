@@ -15,19 +15,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import dev.hashnode.danielwaiguru.groceryke.R
 import dev.hashnode.danielwaiguru.groceryke.presentation.components.GradientButton
-import dev.hashnode.danielwaiguru.groceryke.ui.theme.GroceryKeTheme
+import dev.hashnode.danielwaiguru.groceryke.presentation.navigation.Screen
 import dev.hashnode.danielwaiguru.groceryke.ui.theme.faintGreen
 import dev.hashnode.danielwaiguru.groceryke.ui.theme.primaryColor
 import dev.hashnode.danielwaiguru.groceryke.ui.theme.primaryVariantColor
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -38,16 +37,16 @@ fun WelcomeScreen() {
                 painter = painterResource(id = R.drawable.grocery),
                 contentDescription = stringResource(R.string.welcome_logo),
                 modifier = Modifier
-                    .size(450.dp)
+                    .size(320.dp)
                     .padding(top = 16.dp)
             )
-            WelcomeIntro()
+            WelcomeIntro(navController)
         }
     }
 }
 
 @Composable
-fun WelcomeIntro() {
+fun WelcomeIntro(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -57,7 +56,7 @@ fun WelcomeIntro() {
         ,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(20.dp))
         Text(
             modifier = Modifier.padding(top = 16.dp),
             text = stringResource(R.string.intro),
@@ -81,15 +80,17 @@ fun WelcomeIntro() {
                 colors = listOf(primaryVariantColor, primaryColor)
             )
         ) {
-            
+            navController.popBackStack()
+            navController.navigate(Screen.DashboardScreen.route)
         }
     }
 }
 
+/*
 @Preview
 @Composable
 fun WelcomeScreenPreview() {
     GroceryKeTheme {
         WelcomeScreen()
     }
-}
+}*/

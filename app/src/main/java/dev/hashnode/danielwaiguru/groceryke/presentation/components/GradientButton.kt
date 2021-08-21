@@ -14,8 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.hashnode.danielwaiguru.groceryke.ui.theme.primaryColor
 import dev.hashnode.danielwaiguru.groceryke.ui.theme.primaryVariantColor
 
@@ -44,7 +46,9 @@ fun GradientButton(
         ) {
             Text(
                 text = text,
-                color = textColor
+                color = textColor,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Normal
             )
         }
     }
