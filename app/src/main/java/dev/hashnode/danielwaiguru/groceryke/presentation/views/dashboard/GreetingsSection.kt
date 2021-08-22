@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.hashnode.danielwaiguru.groceryke.R
+import dev.hashnode.danielwaiguru.groceryke.domain.models.Shop
 import dev.hashnode.danielwaiguru.groceryke.ui.theme.faintGreen
 import dev.hashnode.danielwaiguru.groceryke.ui.theme.primaryColor
 import dev.hashnode.danielwaiguru.groceryke.ui.theme.secondaryColor
@@ -156,7 +157,7 @@ fun ChipItem(text: String, color: Color, isSelected: Boolean) {
     }
 }
 @Composable
-fun RecentShop() {
+fun RecentShop(shops: List<Shop>) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.SpaceEvenly
@@ -167,14 +168,17 @@ fun RecentShop() {
             modifier = Modifier.padding(15.dp)
         )
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-
+            items(shops.size) {
+                ShopItem(shop = shops[it])
+            }
         }
     }
 }
 @Composable
-fun ShopItem() {
+fun ShopItem(shop: Shop) {
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(10.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -188,28 +192,33 @@ fun ShopItem() {
         )
         Column {
             Text(
-                text = "Catery Vegetables",
+                text = shop.name,
                 fontWeight = FontWeight.Bold,
                 color = secondaryColor,
                 fontSize = 22.sp
             )
             Spacer(modifier = Modifier.height(6.dp))
             Text(
-                text = "Vegetables",
+                text = shop.category,
                 color = Color.LightGray,
                 fontSize = 12.sp
             )
         }
         Text(
-            text = "$10.99",
+            text = "$ ${shop.price}",
             color = primaryColor,
             fontWeight = FontWeight.Bold,
             fontSize = 25.sp,
         )
     }
 }
+
+@Composable
+fun RowItem() {
+
+}
 @Preview
 @Composable
 fun GreetingPreview() {
-    ShopItem()
+    //ShopItem()
 }

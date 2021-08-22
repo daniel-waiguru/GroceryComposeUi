@@ -9,4 +9,9 @@
     <string name="search_bar">Search bar</string>
     <string name="search">Search Grocery</string>
     <string name="recent_shop">Recent Shop</string>
+    <string name="home">Home</string>
+    <string name="analytics">Analytics</string>
+    <string name="sell">Sell</string>
+    <string name="notifications">Notifications</string>
+    <string name="user_account">Account</string>
 </resources>
