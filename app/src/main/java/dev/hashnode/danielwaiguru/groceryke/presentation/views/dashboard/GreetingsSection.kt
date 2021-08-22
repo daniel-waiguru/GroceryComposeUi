@@ -8,11 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
@@ -20,16 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.hashnode.danielwaiguru.groceryke.R
+import dev.hashnode.danielwaiguru.groceryke.domain.models.Product
 import dev.hashnode.danielwaiguru.groceryke.domain.models.Shop
 import dev.hashnode.danielwaiguru.groceryke.ui.theme.faintGreen
 import dev.hashnode.danielwaiguru.groceryke.ui.theme.primaryColor
@@ -43,7 +38,8 @@ fun GreetingSection() {
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = stringResource(R.string.welcome),
-                fontSize = 13.sp
+                fontSize = 15.sp,
+                color = Color.LightGray
             )
             Text(
                 text = "Daniel Waiguru",
@@ -54,9 +50,8 @@ fun GreetingSection() {
         }
         Image(
             modifier = Modifier
-                .size(30.dp)
-                .clip(CircleShape)
-
+                .size(40.dp)
+                .clip(RoundedCornerShape(8.dp))
             ,
             painter = painterResource(id = R.drawable.danny),
             contentDescription = stringResource(R.string.profile_image),
@@ -67,16 +62,21 @@ fun GreetingSection() {
 
 @Composable
 fun SearchSection() {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    var text by remember {
+        mutableStateOf("")
+    }
+    Row(
+        verticalAlignment = Alignment.CenterVertically) {
         TextField(
-            value = "",
-            onValueChange = {},
+            value = text,
+            onValueChange = {
+                            text = it
+            },
             maxLines = 1,
             singleLine = true,
             modifier = Modifier
                 .height(60.dp)
-                .background(color = Color.White, RoundedCornerShape(10.dp))
-
+                .weight(1f)
             ,
             leadingIcon = {
                 Icon(
@@ -84,8 +84,17 @@ fun SearchSection() {
                     contentDescription = stringResource(id = R.string.search_bar)
                 )
             },
-            label = {
-                Text(text = stringResource(id = R.string.search))
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.White,
+                focusedIndicatorColor =  Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
+            ),
+            shape = RoundedCornerShape(10.dp),
+            placeholder = {
+                Text(
+                    text = stringResource(id = R.string.search),
+                    color = Color.LightGray
+                )
             }
         )
         Spacer(modifier = Modifier.width(10.dp))
@@ -115,12 +124,11 @@ fun ChipSection(
     var selectedChipIndex by remember {
         mutableStateOf(0)
     }
-    LazyRow {
-        items(listOf<String>().size) {
+    LazyRow(modifier = Modifier.fillMaxWidth()) {
+        items(chips.size) {
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .padding(start = 15.dp, top = 15.dp, bottom = 15.dp)
                     .clickable {
                         selectedChipIndex = it
                     }
@@ -164,10 +172,9 @@ fun RecentShop(shops: List<Shop>) {
     ) {
         Text(
             text = stringResource(R.string.recent_shop),
-            style = MaterialTheme.typography.h1,
-            modifier = Modifier.padding(15.dp)
+            style = MaterialTheme.typography.h6,
         )
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(shops.size) {
                 ShopItem(shop = shops[it])
             }
@@ -179,15 +186,17 @@ fun ShopItem(shop: Shop) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp),
+            .padding(vertical = 8.dp)
+            .background(Color.White)
+            .clip(RoundedCornerShape(10.dp)),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painter = painterResource(id = R.drawable.vege),
+            painter = painterResource(id = shop.photo),
             contentDescription = null,
             modifier = Modifier
-                .size(50.dp)
+                .size(60.dp)
                 .clip(RoundedCornerShape(10.dp))
         )
         Column {
@@ -201,7 +210,7 @@ fun ShopItem(shop: Shop) {
             Text(
                 text = shop.category,
                 color = Color.LightGray,
-                fontSize = 12.sp
+                fontSize = 14.sp
             )
         }
         Text(
@@ -214,11 +223,50 @@ fun ShopItem(shop: Shop) {
 }
 
 @Composable
-fun RowItem() {
-
+fun RowItem(product: Product) {
+    Card(
+        Modifier.fillMaxWidth()
+            .padding(horizontal = 8.dp)
+            .background(Color.White)
+            .clip(RoundedCornerShape(10.dp)),
+        elevation = 2.dp,
+    ) {
+        Column (modifier = Modifier.padding(10.dp)) {
+            Image(
+                painter = painterResource(id = product.image),
+                contentDescription = product.name,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(120.dp)
+                    .padding(4.dp)
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Column(verticalArrangement = Arrangement.SpaceEvenly) {
+                Text(
+                    text = product.name,
+                    fontSize = 22.sp,
+                    color = secondaryColor,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = product.category,
+                    color = Color.LightGray,
+                    fontSize = 14.sp
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = "$${product.price}",
+                    fontWeight = FontWeight.Bold,
+                    color = primaryColor,
+                    fontSize = 19.sp
+                )
+            }
+        }
+    }
 }
 @Preview
 @Composable
 fun GreetingPreview() {
-    //ShopItem()
+
 }
