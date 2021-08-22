@@ -1,4 +1,4 @@
-package dev.hashnode.danielwaiguru.groceryke.presentation.welcome
+package dev.hashnode.danielwaiguru.groceryke.presentation.views.welcome
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

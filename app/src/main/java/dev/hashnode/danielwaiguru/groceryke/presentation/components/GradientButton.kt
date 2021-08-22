@@ -39,7 +39,7 @@ fun GradientButton(
     {
         Box(
             modifier = Modifier.background(gradient)
-                .padding(horizontal = 40.dp, vertical = 20.dp)
+                .padding(horizontal = 32.dp, vertical = 16.dp)
 
             ,
             contentAlignment = Alignment.Center

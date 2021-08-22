@@ -4,4 +4,9 @@
     <string name="intro">Buy Groceries\nEasily With Us</string>
     <string name="intro_subtitle">Open your heart to a new world of fresh\nvegetables and a healthier living.</string>
     <string name="get_started">Get Started</string>
+    <string name="profile_image">User profile image</string>
+    <string name="welcome">Welcome</string>
+    <string name="search_bar">Search bar</string>
+    <string name="search">Search Grocery</string>
+    <string name="recent_shop">Recent Shop</string>
 </resources>
