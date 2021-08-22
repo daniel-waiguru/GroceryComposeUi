@@ -57,7 +57,6 @@ fun BottomNavItem(
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .padding(10.dp)
             .clickable {
                 onItemClick()
             }
@@ -66,7 +65,7 @@ fun BottomNavItem(
             painter = painterResource(id = item.iconId),
             contentDescription = item.title,
             tint = if (isSelected) activeColor else inactiveColor,
-            modifier = Modifier.size(20.dp)
+            modifier = Modifier.size(25.dp)
         )
     }
 }

@@ -1,9 +1,11 @@
 package dev.hashnode.danielwaiguru.groceryke.domain.models
 
+import androidx.annotation.DrawableRes
+
 data class Shop(
     val name: String,
     val category: String,
-    val photo: Int,
+    @DrawableRes val photo: Int,
     val price: Double
 )
 

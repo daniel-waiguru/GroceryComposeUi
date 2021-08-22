@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.hashnode.danielwaiguru.groceryke.presentation.views.dashboard.DashboardScreen
 import dev.hashnode.danielwaiguru.groceryke.presentation.views.welcome.WelcomeScreen
 
 @Composable
@@ -12,6 +13,9 @@ fun Navigation() {
     NavHost(navController = navController, startDestination = Screen.WelcomeScreen.route) {
         composable(Screen.WelcomeScreen.route) {
             WelcomeScreen(navController = navController)
+        }
+        composable(Screen.DashboardScreen.route) {
+            DashboardScreen()
         }
     }
 }
