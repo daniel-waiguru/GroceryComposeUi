@@ -16,6 +16,7 @@ fun Navigation() {
         }
         composable(Screen.DashboardScreen.route) {
             DashboardScreen()
+
         }
     }
 }
